@@ -1,0 +1,63 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #1f1c2c, #928dab); position: fixed; top: 0; left: 0; width: 100%; z-index: 1030;">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold text-white fs-4" href="#">🛠 Admin Panel</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold hover-effect" href="#">All Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold hover-effect" href="/orders">All Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white fw-semibold hover-effect" href="/admin-users">All Users</a>
+          </li>
+        </ul>
+
+        <!-- Search bar aligned right -->
+        <form class="d-flex" action="/admin-search" method="GET" role="search">
+          <input class="form-control me-2" type="search" name="q" placeholder="Search products..." aria-label="Search" required>
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <style>
+    .hover-effect {
+      transition: all 0.3s ease;
+    }
+
+    .hover-effect:hover {
+      color: #ffd700 !important;
+      text-shadow: 0 0 10px #ffd700;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .form-control::placeholder {
+      color: #ccc;
+      font-style: italic;
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #ffd700;
+    }
+  </style>
+</header>

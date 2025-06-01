@@ -1,0 +1,99 @@
+<section>
+<h2 class="text-center mt-4">🛒 Your Shopping Cart</h2>
+
+{{#if cartItems.length}}
+<div class="container mt-4">
+  <div class="row g-4">
+    {{#each cartItems}}
+    <div class="col-md-6">
+      <div class="card flex-row align-items-center p-3 shadow-sm">
+        <img src="{{product.image}}" class="img-fluid" style="width: 100px; height: auto;" alt="{{product.name}}">
+
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="card-text">Price: ₹{{product.price}}</p>
+          <p class="card-text">Total: ₹{{multiply quantity product.price}}</p>
+
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <form action="/update-cart-quantity" method="POST" class="d-flex align-items-center gap-2">
+              <input type="hidden" name="productId" value="{{product._id}}">
+              <button type="submit" name="action" value="decrease" class="btn btn-outline-secondary btn-sm">−</button>
+              <span>{{quantity}}</span>
+              <button type="submit" name="action" value="increase" class="btn btn-outline-secondary btn-sm">+</button>
+            </form>
+          </div>
+
+          <!-- ✅ Order Now Form with Location + Price -->
+          <form action="/order-now" method="POST" class="mb-2">
+            <input type="hidden" name="productId" value="{{product._id}}">
+            <input type="hidden" name="quantity" value="{{quantity}}">
+            <input type="hidden" name="price" value="{{product.price}}">
+
+            <div class="mb-2">
+              <label for="location-{{@index}}" class="form-label">Delivery Location:</label>
+              <input type="text" name="location" id="location-{{@index}}" class="form-control form-control-sm location-input" required>
+            </div>
+
+            <!-- Google Maps Preview -->
+            <iframe
+              id="map-{{@index}}"
+              width="100%"
+              height="150"
+              style="border:0; display: none;"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+
+            <button type="submit" class="btn btn-success btn-sm mt-2">Order Now</button>
+          </form>
+
+          <form action="/remove-from-cart" method="POST">
+            <input type="hidden" name="productId" value="{{product._id}}">
+            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+    <!-- Grand total card -->
+    <div class="col-12">
+      <div class="card bg-light text-end p-3">
+        <h5 class="mb-0">Grand Total: ₹{{totalPrice cartItems}}</h5>
+      </div>
+    </div>
+  </div>
+</div>
+{{else}}
+  <p class="text-center mt-5">Your cart is empty 😢</p>
+{{/if}}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const orderForms = document.querySelectorAll('form[action="/order-now"]');
+
+    orderForms.forEach(form => {
+      form.addEventListener("submit", function (e) {
+        const confirmOrder = confirm("Are you sure you want to place this order?");
+        if (!confirmOrder) {
+          e.preventDefault();
+        } else {
+          alert("Your order has been placed successfully!");
+        }
+      });
+    });
+
+    // Google Maps preview
+    document.querySelectorAll(".location-input").forEach((input, index) => {
+      input.addEventListener("blur", function () {
+        const location = encodeURIComponent(this.value);
+        const map = document.getElementById(`map-${index}`);
+        map.src = `https://www.google.com/maps?q=${location}&output=embed`;
+        map.style.display = "block";
+      });
+    });
+  });
+</script>
+</section>
+

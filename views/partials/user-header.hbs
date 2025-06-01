@@ -1,0 +1,53 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #343a40; position: fixed; top: 0; left: 0; width: 100%; z-index: 1030;">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-white fs-3" href="/">
+        <i class="bi bi-bag-check-fill me-2"></i>SKYFYRE SHOPPING
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarContent" aria-controls="navbarContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link fw-semibold text-white" href="/">🍔 Foods</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-semibold text-white" href="/cart">🛒 Cart</a>
+          </li>
+          {{#if user}}
+          <li class="nav-item">
+            <a class="nav-link fw-semibold text-white" href="/user-order">📦 Orders</a>
+          </li>
+          {{/if}}
+
+          <li class="nav-item dropdown ms-lg-3">
+            <a class="nav-link dropdown-toggle text-white fw-semibold" href="#" id="userDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              {{#if user}}👤 {{user.name}}{{else}}Account{{/if}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              {{#if user}}
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+              {{else}}
+                <li><a class="dropdown-item" href="/login">Login</a></li>
+                <li><a class="dropdown-item" href="/signup">Signup</a></li>
+              {{/if}}
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Optional Styling for Body (to avoid overlap with navbar) -->
+<style>
+  body {
+    padding-top: 70px; /* Adjust based on navbar height */
+  }
+</style>

@@ -1,0 +1,33 @@
+<div style="margin-top: 70px;">
+<section class="py-4">
+  <div class="container">
+    <div class="d-flex">
+      <a href="/admin/add-product" class="btn btn-success ms-auto mb-4">Add Products</a>
+    </div>
+
+    <div class="row g-4">
+      {{#each products}}
+      <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+          <div class="row g-0">
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
+              <img src="/{{image}}" class="img-fluid rounded-start" alt="{{name}}" style="height: 120px; object-fit: cover;">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title mb-1">{{name}}</h5>
+                <p class="card-text mb-1"><strong>Category:</strong> {{category}}</p>
+                <p class="card-text mb-1"><strong>Price:</strong> ₹{{price}}</p>
+                <p class="card-text small text-muted mb-2">{{description}}</p>
+                <a href="/admin/edit-product/{{_id}}" class="btn btn-sm btn-primary me-2">Edit</a>
+                <a href="/admin/delete-product/{{_id}}" class="btn btn-sm btn-danger"
+                  onclick="return confirm('Are you sure you want to delete {{name}}?')">Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

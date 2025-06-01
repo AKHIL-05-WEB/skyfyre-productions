@@ -1,0 +1,53 @@
+
+
+{{#if orders.length}}
+  <div class="row">
+    {{#each orders}}
+      <div class="col-12 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Order Date: {{formatDate date}}</h5>
+            <p><strong>Status:</strong> <span class="badge bg-warning">{{status}}</span></p>
+            <!-- Display the location -->
+            <p><strong>Location:</strong> {{location}}</p> <!-- Add Location here -->
+
+            <!-- Loop through products for each order -->
+            {{#each products}}
+              <div class="row mb-3">
+                <!-- Product Image -->
+                <div class="col-md-3">
+                  <img src="{{image}}" alt="{{name}}" class="img-fluid" style="object-fit: cover; height: 150px; width: 100%;">
+                </div>
+
+                <!-- Product Details -->
+                <div class="col-md-9">
+                  <div class="d-flex flex-column">
+                    <h5>{{name}}</h5>
+                    <p><strong>Quantity:</strong> {{quantity}}</p>
+                    <p><strong>Price:</strong> ₹{{price}}</p>
+                    <p><strong>Total:</strong> ₹{{multiply price quantity}}</p>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+
+            <div class="text-end mt-3">
+              <h6><strong>Total Order Amount: ₹{{totalAmount}}</strong></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <div class="text-center mt-5">
+  <div class="d-flex flex-column align-items-center">
+    
+    <h4 class="text-muted">Oops! No orders found.</h4>
+    <p class="text-secondary">You haven't placed any orders yet. Start shopping now and your orders will appear here!</p>
+    <a href="/" class="btn btn-primary mt-3">
+      🛒 Start Shopping
+    </a>
+  </div>
+</div>
+{{/if}}
