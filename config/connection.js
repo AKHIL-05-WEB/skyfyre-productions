@@ -1,14 +1,16 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
 let db;
 
-// Hardcoded MongoDB Atlas connection string with your credentials
-const MONGO_URI = 'mongodb+srv://akhil0708jnv:akhilsanil@cluster0.htemwbz.mongodb.net/shopping_cart?retryWrites=true&w=majority';
+// ✅ Updated MongoDB URI with SSL required
+const MONGO_URI = 'mongodb+srv://akhil0708jnv:akhilsanil@cluster0.htemwbz.mongodb.net/shopping_cart?retryWrites=true&w=majority&ssl=true';
 
 const connectDB = async () => {
   try {
-    const client = await MongoClient.connect(MONGO_URI);  // Removed deprecated options
-    db = client.db('shopping_cart'); // Your database name
+    const client = await MongoClient.connect(MONGO_URI, {
+      serverApi: ServerApiVersion.v1, // ✅ Ensures stable API behavior
+    });
+    db = client.db('shopping_cart');
     console.log('✅ MongoDB Connected!');
   } catch (err) {
     console.error('❌ Error connecting to MongoDB:', err);
